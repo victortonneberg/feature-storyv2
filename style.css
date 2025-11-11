@@ -1,0 +1,487 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Georgia", serif;
+  line-height: 1.8;
+  color: #1a1a1a;
+  background: #f8f8f8;
+  transition: background-color 1s ease;
+}
+
+body.dark-turn {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+.hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+/* Selve bakgrunnen */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("https://bernardmarr.com/img/What%20is%20the%20Difference%20Between%20Blockchain%20And%20Bitcoin.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: blur(4px) brightness(0.4); /* blur + mørkere */
+  z-index: -1;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.hero .intro {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  background: white;
+  position: relative;
+}
+
+.dark-turn .container {
+  background: #1a1a1a;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 3rem 0 1.5rem;
+  color: #2c3e50;
+}
+
+.dark-turn h2 {
+  color: #e74c3c;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.scroll-section {
+  min-height: 400px;
+  margin: 2rem 0;
+  opacity: 0.3;
+  transform: translateY(50px);
+  transition: all 0.6s ease;
+}
+
+.scroll-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.money-container {
+  position: relative;
+  min-height: 450px;
+}
+
+.money-visual {
+  position: sticky;
+  top: 20px;
+  max-width: 400px;
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  z-index: 5;
+}
+
+.money-visual.hidden {
+  opacity: 0;
+}
+
+.money-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  transition: all 0.8s ease;
+}
+
+.money-label {
+  font-size: 1rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.growth-bar {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  margin-top: 1.5rem;
+  overflow: hidden;
+}
+
+.growth-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  width: 0%;
+  transition: width 1s ease;
+  border-radius: 6px;
+}
+
+.info-box {
+  background: #f0f4f8;
+  border-left: 4px solid #3182ce;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.6s ease;
+}
+
+.info-box.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dark-turn .info-box {
+  background: #2d3748;
+  border-left-color: #e74c3c;
+}
+
+.info-box strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c5282;
+  font-size: 1.1rem;
+}
+
+.dark-turn .info-box strong {
+  color: #fc8181;
+}
+
+.chat-bubble {
+  background: #e2e8f0;
+  padding: 1rem 1.5rem;
+  border-radius: 20px 20px 20px 5px;
+  margin: 1rem 0;
+  max-width: 80%;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s ease;
+}
+
+.chat-bubble.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.warning-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(220, 38, 38, 0);
+  pointer-events: none;
+  transition: background 0.8s ease;
+  z-index: 10;
+}
+
+.warning-overlay.active {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.alert-box {
+  background: #fff5f5;
+  border: 2px solid #fc8181;
+  padding: 2rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.5s ease;
+}
+
+.alert-box.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.alert-box p {
+  color: #1a1a1a;
+}
+
+.alert-box .tax-demand {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #c53030;
+  margin: 1rem 0;
+}
+
+.dark-turn .alert-box {
+  background: #3a2a2a;
+  border-color: #fc8181;
+}
+
+.dark-turn .alert-box p {
+  color: #e0e0e0;
+}
+
+.dark-turn .alert-box .tax-demand {
+  color: #fc8181;
+}
+
+.pub-photo {
+  height: 40vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("https://tellusdmsmedia.newmindmedia.com/wsimgs/D4FDF1F0DEBA7F0B29A17EFD7E52546AFBC8B8A3.jpg")
+      center/cover no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s ease;
+}
+
+/* Fade inn sammen med scroll-sections */
+.pub-photo.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pub-caption {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  max-width: 600px;
+  font-size: 1.1rem;
+}
+
+.portrait-section {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  margin: 2rem 0;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+  border-radius: 20px;
+}
+
+.dark-turn .portrait-section {
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+}
+
+.portrait-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.portrait-container {
+  max-width: 600px;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.8s ease 0.3s;
+}
+
+.portrait-section.active .portrait-container {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.portrait-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  filter: grayscale(30%) contrast(110%);
+  transition: all 0.5s ease;
+}
+
+.portrait-container img:hover {
+  filter: grayscale(0%) contrast(100%);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.portrait-caption {
+  font-style: italic;
+  color: #495057;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  padding: 0 2rem;
+  font-weight: 500;
+  border-left: 3px solid #3182ce;
+  padding-left: 1.5rem;
+  text-align: left;
+}
+
+.dark-turn .portrait-caption {
+  color: #e2e8f0;
+  border-left-color: #e74c3c;
+}
+
+/* ========== FACT BOXES ========== */
+.fact-box {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  margin: 3rem 0;
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateX(-40px) scale(0.98);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fact-box.visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.fact-box.blue {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-left: 5px solid #3b82f6;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+.fact-box.red {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-left: 5px solid #ef4444;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.1);
+}
+
+.fact-box.purple {
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+  border-left: 5px solid #8b5cf6;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.1);
+}
+
+.fact-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.fact-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #111827;
+}
+
+.fact-content p {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.fact-box.blue .fact-content h3,
+.fact-box.blue .fact-content p {
+  color: #1e3a8a;
+}
+
+.fact-box.red .fact-content h3,
+.fact-box.red .fact-content p {
+  color: #7f1d1d;
+}
+
+.fact-box.purple .fact-content h3,
+.fact-box.purple .fact-content p {
+  color: #581c87;
+}
+
+/* ========== CHARTS ========== */
+.chart-section {
+  margin: 5rem 0;
+  padding: 3rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chart-section.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.chart-wrapper {
+  max-width: 500px;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero .intro {
+    font-size: 1rem;
+  }
+  .money-amount {
+    font-size: 2.5rem;
+  }
+
+  .portrait-section {
+    min-height: 60vh;
+    padding: 2rem 1rem;
+    margin: 1rem 0;
+  }
+
+  .portrait-container {
+    max-width: 100%;
+  }
+
+  .portrait-caption {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+    margin-top: 1.5rem;
+  }
+}
